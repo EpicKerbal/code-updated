@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Open New Window</title>
+	<script type="text/javascript">
+		var leftPos, topPos;
+		var dx = 5; // horizontal speed
+		var dy = 5; // vertical speed
+		var intervalId;
+		
+		function moveWindow() {
+			leftPos += dx;
+			topPos += dy;
+			if (leftPos < 0 || leftPos + 500 > screen.width) {
+				dx = -dx;
+			}
+			if (topPos < 0 || topPos + 500 > screen.height) {
+				dy = -dy;
+			}
+			window.moveTo(leftPos, topPos);
+		}
+		
+		window.onload = function() {
+			leftPos = Math.floor(Math.random() * screen.width);
+			topPos = Math.floor(Math.random() * screen.height);
+			window.open('https://www.example.com', 'Example', 'width=500,height=500,left=' + leftPos + ',top=' + topPos);
+			intervalId = setInterval(moveWindow, 10);
+		}
+		
+		window.onbeforeunload = function() {
+			clearInterval(intervalId);
+		}
+	</script>
+</head>
+<body>
+	<p>Page content goes here</p>
+</body>
+</html>
