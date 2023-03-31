@@ -1,39 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Open New Window</title>
-	<script type="text/javascript">
-		var leftPos, topPos;
-		var dx, dy;
-		var intervalId;
-		
-		function moveWindow() {
-			leftPos += dx;
-			topPos += dy;
-			if (leftPos < 0 || leftPos + 500 > screen.width) {
-				dx = -dx * Math.random(); // reverse direction and set new speed
-			}
-			if (topPos < 0 || topPos + 500 > screen.height) {
-				dy = -dy * Math.random(); // reverse direction and set new speed
-			}
-			window.moveTo(leftPos, topPos);
-		}
-		
-		window.onload = function() {
-			leftPos = Math.floor(Math.random() * screen.width);
-			topPos = Math.floor(Math.random() * screen.height);
-			dx = Math.random() * 10 - 5; // random speed between -5 and 5
-			dy = Math.random() * 10 - 5; // random speed between -5 and 5
-			window.open('https://www.example.com', 'Example', 'width=500,height=500,left=' + leftPos + ',top=' + topPos);
-			intervalId = setInterval(moveWindow, 10);
-		}
-		
-		window.onbeforeunload = function() {
-			clearInterval(intervalId);
-		}
-	</script>
+    <title>Open New Window</title>
+    <script type="text/javascript">
+        var leftPos, topPos;
+        var dx, dy;
+        var intervalId;
+
+        function moveWindow() {
+            leftPos += dx;
+            topPos += dy;
+            if (leftPos < 0 || leftPos + 500 > screen.width) {
+                dx = -dx * Math.random(); // reverse direction and set new speed
+            }
+            if (topPos < 0 || topPos + 500 > screen.height) {
+                dy = -dy * Math.random(); // reverse direction and set new speed
+            }
+            window.moveTo(leftPos, topPos);
+
+            // If the window hits an edge, change its background color to indicate a bounce
+            if (leftPos < 0 || leftPos + 500 > screen.width || topPos < 0 || topPos + 500 > screen.height) {
+                document.body.style.backgroundColor = 'red';
+            } else {
+                document.body.style.backgroundColor = 'white';
+            }
+        }
+
+        window.onload = function() {
+            leftPos = Math.floor(Math.random() * screen.width);
+            topPos = Math.floor(Math.random() * screen.height);
+            dx = Math.random() * 10 - 5; // random speed between -5 and 5
+            dy = Math.random() * 10 - 5; // random speed between -5 and 5
+            window.open('https://www.example.com', 'Example', 'width=500,height=500,left=' + leftPos + ',top=' + topPos);
+            intervalId = setInterval(moveWindow, 10);
+        }
+
+        window.onbeforeunload = function() {
+            clearInterval(intervalId);
+        }
+    </script>
 </head>
 <body>
-	<p>Page content goes here</p>
+    <p>Page content goes here</p>
 </body>
 </html>
