@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Open New Window</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
 		var leftPos, topPos;
 		var dx, dy;
@@ -19,18 +20,17 @@
 			window.moveTo(leftPos, topPos);
 		}
 		
-		window.onload = function() {
+		$(document).ready(function() {
 			leftPos = Math.floor(Math.random() * screen.width);
 			topPos = Math.floor(Math.random() * screen.height);
 			dx = Math.random() * 10 - 5; // random speed between -5 and 5
 			dy = Math.random() * 10 - 5; // random speed between -5 and 5
 			var newWindow = window.open('https://www.example.com', 'Example', 'width=500,height=500,left=' + leftPos + ',top=' + topPos);
 			intervalId = setInterval(moveWindow, 10);
-		}
-		
-		window.onbeforeunload = function() {
-			clearInterval(intervalId);
-		}
+			$(newWindow).unload(function() {
+				clearInterval(intervalId);
+			});
+		});
 	</script>
 </head>
 <body>
