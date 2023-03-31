@@ -17,13 +17,6 @@
 				dy = -dy * Math.random(); // reverse direction and set new speed
 			}
 			window.moveTo(leftPos, topPos);
-
-			// If the window hits an edge, change its background color to indicate a bounce
-			if (leftPos < 0 || leftPos + 500 > screen.width || topPos < 0 || topPos + 500 > screen.height) {
-				window.document.body.style.backgroundColor = 'red';
-			} else {
-				window.document.body.style.backgroundColor = 'white';
-			}
 		}
 		
 		window.onload = function() {
